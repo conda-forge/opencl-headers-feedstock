@@ -2,7 +2,9 @@ cmake -G Ninja ${CMAKE_ARGS} .
 ninja -j${CPU_COUNT}
 ninja install
 
-ctest
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+  ctest
+fi
 
 # remove spurious link
 rm -rf $PREFIX/include/CL/CL
