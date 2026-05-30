@@ -1,4 +1,4 @@
-{% set version = "2025.06.13" %}
+{% set version = "2026.05.29" %}
 
 package:
   name: opencl-headers
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/KhronosGroup/OpenCL-Headers/archive/v{{ version }}.zip
-  sha256: 0712908889a95f76dc0266b4f5c16d13fae58af2ab44f28ce75e1248e9b71b08
+  sha256: 0bdef6f653c577827a75fac3e3f18b0bf000171e39fa65c2eb84ec804c822cab
 
 build:
   number: 0
