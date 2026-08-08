@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  version: "2025.06.13"
+
+package:
+  name: opencl-headers
+  version: ${{ version }}
+
+source:
+  url: https://github.com/KhronosGroup/OpenCL-Headers/archive/v${{ version }}.zip
+  sha256: 0712908889a95f76dc0266b4f5c16d13fae58af2ab44f28ce75e1248e9b71b08
+
+build:
+  number: 1
+  script:
+    file: build
+    env:
+      CONDA_BUILD_SKIP_TESTS: ${{ CONDA_BUILD_SKIP_TESTS | default("0") }}
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cmake
+    - ninja
+    - python *
+
+tests:
+  - package_contents:
+      include:
+        - CL/cl.h
+      files:
+        - if: win
+          then: Library/lib/pkgconfig/OpenCL-Headers.pc
+          else: lib/pkgconfig/OpenCL-Headers.pc
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: OpenCL headers
+  homepage: https://www.khronos.org/registry/cl/
+  repository: https://github.com/KhronosGroup/OpenCL-Headers
+
+extra:
+  recipe-maintainers:
+    - isuruf
